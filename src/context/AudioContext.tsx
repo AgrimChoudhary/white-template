@@ -18,7 +18,11 @@ const AudioContext = createContext<AudioContextType>({
 
 export const AudioProvider: React.FC<AudioProviderProps> = ({ children, isDisabledOnRoutes = [] }) => {
   const [audio] = useState(new Audio());
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(() => {
+    // Check localStorage for mute preference
+    const stored = localStorage.getItem('music-muted');
+    return stored === 'true' ? false : true;
+  });
   const [isInitialized, setIsInitialized] = useState(false);
   const location = useLocation();
   
@@ -32,15 +36,20 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({ children, isDisabl
     audio.loop = true;
     audio.volume = 0.5;
     audio.preload = "auto";
+    // Check mute preference
+    const stored = localStorage.getItem('music-muted');
+    if (stored === 'true') {
+      audio.muted = true;
+      setIsPlaying(false);
+      setIsInitialized(true);
+      return;
+    }
     
     const playAudio = async () => {
       if (!isInitialized && !isMusicDisabled) {
         try {
-          // Set audio properties for autoplay
           audio.muted = false;
           audio.autoplay = true;
-          
-          // Try to play
           await audio.play();
           setIsPlaying(true);
           setIsInitialized(true);
@@ -120,9 +129,11 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({ children, isDisabl
       if (isPlaying) {
         audio.muted = true;
         setIsPlaying(false);
+        localStorage.setItem('music-muted', 'true');
       } else {
         audio.muted = false;
         setIsPlaying(true);
+        localStorage.setItem('music-muted', 'false');
       }
     } catch (error) {
       console.error("Error toggling music:", error);

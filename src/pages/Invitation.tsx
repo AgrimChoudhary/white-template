@@ -20,6 +20,7 @@ import { ArrowLeftCircle, Heart, MapPin, User, Music, Volume2, VolumeX, Sparkles
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Badge } from '@/components/ui/badge';
 import AnimatedGuestName from '../components/AnimatedGuestName';
+import OptimizedImage from '../components/OptimizedImage';
 
 const Invitation = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -102,12 +103,13 @@ const Invitation = () => {
           <div className="relative mb-6">
             <div className="absolute -inset-4 bg-gradient-to-r from-orange-400/20 via-yellow-400/30 to-red-400/20 rounded-full blur-xl animate-pulse-soft"></div>
             <div className="relative bg-gradient-to-br from-orange-50/90 via-yellow-50/95 to-orange-50/90 backdrop-blur-lg rounded-full p-6 border border-orange-200/60">
-              <img 
-                src="/lovable-uploads/a3236bd1-0ba5-41b5-a422-ef2a60c43cd4.png" 
+              <OptimizedImage 
+                src="/lovable-uploads/b0b6e6c1-770d-4a6e-8f9c-7f3bdcd7c3a4.png" 
                 alt="Lord Ganesha" 
                 className="w-24 h-24 object-contain animate-floating"
                 loading="eager"
-                decoding="async"
+                priority={true}
+                hideLoadingOverlay={true}
               />
             </div>
           </div>
@@ -148,12 +150,13 @@ const Invitation = () => {
                 <div className="relative">
                   <div className="absolute -inset-4 bg-gradient-to-r from-orange-400/20 via-yellow-400/30 to-red-400/20 rounded-full blur-xl animate-pulse-soft"></div>
                   <div className="relative bg-gradient-to-br from-orange-50/90 via-yellow-50/95 to-orange-50/90 backdrop-blur-lg rounded-full p-6 border border-orange-200/60">
-                    <img 
-                      src="/lovable-uploads/a3236bd1-0ba5-41b5-a422-ef2a60c43cd4.png" 
+                    <OptimizedImage 
+                      src="/lovable-uploads/b0b6e6c1-770d-4a6e-8f9c-7f3bdcd7c3a4.png" 
                       alt="Lord Ganesha" 
                       className="w-24 h-24 object-contain"
                       loading="eager"
-                      decoding="async"
+                      priority={true}
+                      hideLoadingOverlay={true}
                     />
                   </div>
                 </div>

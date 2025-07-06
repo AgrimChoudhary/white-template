@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGuest } from '../context/GuestContext';
@@ -195,21 +194,6 @@ const WelcomeForm: React.FC = () => {
             )}
           </Button>
         </div>
-        
-        {/* Enhanced music control button */}
-        <div className="absolute bottom-4 right-4">
-          <button
-            onClick={toggleMusic}
-            className="p-3 rounded-full bg-gradient-to-br from-wedding-cream/90 to-wedding-blush/70 border-2 border-wedding-gold/30 text-wedding-maroon hover:from-wedding-cream hover:to-wedding-blush/80 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            {isPlaying ? <Volume2 size={18} /> : <VolumeX size={18} />}
-          </button>
-        </div>
-        
-        {/* Enhanced bottom decorative element */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-2">
-          <div className="w-full h-full bg-gradient-to-r from-transparent via-wedding-gold/40 to-transparent rounded-full"></div>
-        </div>
       </div>
       
       {/* Enhanced date teaser with modern card design */}
@@ -221,6 +205,22 @@ const WelcomeForm: React.FC = () => {
             <Sparkles size={14} className="text-wedding-gold animate-pulse" />
           </p>
         </div>
+      </div>
+      {/* Floating music toggle, fixed position, same as Invitation page */}
+      <div className="fixed bottom-20 right-4 z-30 flex flex-col gap-3">
+        <Button 
+          onClick={toggleMusic}
+          variant="outline"
+          size="icon"
+          className="rounded-full bg-wedding-cream/80 backdrop-blur-sm border-wedding-gold/30 hover:bg-wedding-cream shadow-gold-soft"
+          aria-label={isPlaying ? "Mute music" : "Play music"}
+        >
+          {isPlaying ? (
+            <Volume2 size={18} className="text-wedding-maroon" />
+          ) : (
+            <VolumeX size={18} className="text-wedding-maroon" />
+          )}
+        </Button>
       </div>
     </div>
   );

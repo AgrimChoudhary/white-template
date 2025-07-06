@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useGuest } from '../context/GuestContext';
 import { FallingHearts, FireworksDisplay } from './AnimatedElements';
 import { Star, Music, Heart, Crown } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import AnimatedGuestName from './AnimatedGuestName';
+import OptimizedImage from './OptimizedImage';
 
 // Couple names as placeholders for easy future changes
 const GROOM_FIRST_NAME = "Sidharth";
@@ -135,12 +135,14 @@ const InvitationHeader: React.FC<InvitationHeaderProps> = ({
                 
                 {/* Only show the image after transition completes */}
                 {showGaneshaImage && (
-                  <img 
-                    src="/lovable-uploads/a3236bd1-0ba5-41b5-a422-ef2a60c43cd4.png" 
+                  <OptimizedImage 
+                    src="/lovable-uploads/b0b6e6c1-770d-4a6e-8f9c-7f3bdcd7c3a4.png" 
                     alt="Lord Ganesha" 
                     className="w-full h-full object-contain animate-floating relative z-10 opacity-0 animate-fade-in"
-                    loading="lazy"
+                    loading="eager"
+                    priority={true}
                     style={{ animationDelay: '0.2s' }}
+                    hideLoadingOverlay={true}
                   />
                 )}
                 
@@ -259,13 +261,14 @@ const InvitationHeader: React.FC<InvitationHeaderProps> = ({
               <div className={`relative bg-white/30 backdrop-blur-sm rounded-full p-3 border border-wedding-gold/30 transition-all duration-500 ${
                 isClicked ? 'shadow-2xl border-wedding-gold/60' : ''
               }`}>
-                <img 
+                <OptimizedImage 
                   src={coupleImageUrl || "/lovable-uploads/f002c96a-d091-4373-9cc7-72487af38606.png"}
                   alt={`${groomName} and ${brideName}`}
                   className={`w-44 h-auto sm:w-52 md:w-60 lg:w-72 object-contain relative z-10 transition-all duration-500 ${
                     isClicked ? 'brightness-110 contrast-110' : ''
                   }`}
-                  loading="lazy"
+                  loading="eager"
+                  priority={true}
                 />
               </div>
             </div>
